@@ -329,7 +329,7 @@ def exec_command(*cmdargs, **kwargs):
     raise_enoent = kwargs.pop('__raise_ENOENT__', None)
     proc = subprocess.Popen(cmdargs, stdout=subprocess.PIPE, **kwargs)
     try:
-        out = proc.communicate(timeout=60)[0]
+        out = proc.communicate(timeout=90)[0]
     except OSError as e:
         if raise_enoent and e.errno == errno.ENOENT:
             raise
@@ -472,7 +472,7 @@ def exec_command_all(*cmdargs: str, **kwargs):
     )
     # Waits for subprocess to complete.
     try:
-        out, err = proc.communicate(timeout=60)
+        out, err = proc.communicate(timeout=90)
     except subprocess.TimeoutExpired:
         proc.kill()
         raise
